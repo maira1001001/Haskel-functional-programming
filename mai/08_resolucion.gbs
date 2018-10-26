@@ -1,0 +1,150 @@
+// 1.
+
+/*
+    PROPÓSITO:
+        Describe una lista de 4 números, donde cada uno representa la cantidad
+        de bolitas de un color, en orden alfabético, en la celda actual. 
+    PRECONDICIONES:
+        Ninguna.
+*/
+function coloresCelda() {
+    return [nroBolitas(Azul), nroBolitas(Negro), nroBolitas(Rojo), nroBolitas(Verde)]
+}
+
+function coloresCelda() {
+    colorActual := minColor()
+    listaHastaAhora := []
+    while (colorActual /= maxColor()) {
+        listaHastaAhora := listaHastaAhora ++ [ nroBolitas(colorActual) ]
+        colorActual := siguiente(colorActual)
+    }
+    return (listaHastaAhora ++ [ nroBolitas(colorActual) ])
+}
+
+// 2.
+
+/*
+    PROPÓSITO:
+        Describe una lista de 4 números, donde cada uno representa la cantidad
+        de bolitas azules de la celda actual y las tres contiguas al Este (en
+        ese orden).
+    PRECONDICIONES:
+        Hay tres celdas al Este.
+*/
+function coloresVariasCeldas() {
+    listaHastaAhora := [ nroBolitas(Azul) ]
+    repeat (3) {
+        Mover(Este)
+        listaHastaAhora := listaHastaAhora ++ [ nroBolitas(Azul) ]
+    }
+    return (listaHastaAhora)
+}
+
+// 3.
+
+/*
+    PROPÓSITO:
+        Describe la cantidad de bolitas azules representada en "listaDeNúmeros".
+    PRECONDICIONES:
+        La lista tiene 4 elementos.
+*/
+function cantidadDeAzulesEn_(listaDeNúmeros) {
+    return (primero(listaDeNúmeros))
+}
+
+/*
+    PROPÓSITO:
+        Describe la cantidad de bolitas negras representada en "listaDeNúmeros".
+    PRECONDICIONES:
+        La lista tiene 4 elementos.
+*/
+function cantidadDeNegrasEn_(listaDeNúmeros) {
+    return (primero(resto(listaDeNúmeros)))
+}
+
+/*
+    PROPÓSITO:
+        Describe la cantidad de bolitas rojas representada en "listaDeNúmeros".
+    PRECONDICIONES:
+        La lista tiene 4 elementos.
+*/
+function cantidadDeRojasEn_(listaDeNúmeros) {
+    return (primero(sinLosDosPrimeros(listaDeNúmeros)))
+}
+
+/*
+    PROPÓSITO:
+        Describe la cantidad de bolitas verdes representada en "listaDeNúmeros".
+    PRECONDICIONES:
+        La lista tiene 4 elementos.
+*/
+function cantidadDeVerdesEn_(listaDeNúmeros) {
+    return (primero(sinLosTresPrimeros(listaDeNúmeros)))
+}
+
+// 4.
+
+/*
+    PROPÓSITO:
+        Describe Verdadero cuando hay igual cantidad de bolitas de todos los
+        colores en "listaDeNúmeros".
+    PRECONDICIONES:
+        La lista tiene 4 elementos.
+*/
+function hayMismaCantidad(listaDeNúmeros) {
+    return (primero(listaDeNúmeros) == segundo(listaDeNúmeros)
+            && segundo(listaDeNúmeros) == tercero(listaDeNúmeros)
+            && tercero(listaDeNúmeros) == cuarto(listaDeNúmeros))
+}
+
+/*
+    PROPÓSITO:
+        Describe el segundo elemento de "lista".
+    PRECONDICIONES:
+        La lista tiene al menos 2 elementos.
+*/
+function segundo(lista) {
+    return (primero(resto(lista)))
+}
+
+/*
+    PROPÓSITO:
+        Describe el tercer elemento de "lista".
+    PRECONDICIONES:
+        La lista tiene al menos 3 elementos.
+*/
+function tercero(lista) {
+    return (primero(sinLosDosPrimeros(lista)))
+}
+
+/*
+    PROPÓSITO:
+        Describe el cuarto elemento de "lista".
+    PRECONDICIONES:
+        La lista tiene al menos 4 elementos.
+*/
+function cuarto(lista) {
+    return (primero(sinLosTresPrimeros(lista)))
+}
+
+/*
+    PROPÓSITO:
+        Describe una lista con los elementos de "lista", excepto los dos
+        primeros.
+    PRECONDICIONES:
+        La lista tiene al menos 2 elementos.
+*/
+function sinLosDosPrimeros(lista) {
+    return (resto(resto(lista)))
+}
+
+/*
+    PROPÓSITO:
+        Describe una lista con los elementos de "lista", excepto los tres
+        primeros.
+    PRECONDICIONES:
+        La lista tiene al menos 3 elementos.
+*/
+function sinLosTresPrimeros(lista) {
+    return (resto(resto(resto(lista))))
+}
