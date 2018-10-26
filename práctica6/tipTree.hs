@@ -1,3 +1,4 @@
+--#2.
 data TipTree a = Tip a | Join (TipTree a) (TipTree a)
 
 -- heightTip:: TipTree a -> Int
