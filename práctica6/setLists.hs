@@ -3,8 +3,8 @@
 --Set :: [e] -> Set e
 data Set x = Set [x] deriving Show
 
---include :: e -> Set e -> Bool
-include x (Set xs) = belongs x xs
+--belongs':: e -> Set e -> Bool
+belongs' x (Set xs) = belongs x xs
 
 --belongss :: e -> [e] -> Bool
 belongs x []     = False
