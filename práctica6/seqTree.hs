@@ -46,6 +46,18 @@ normSeqExample = Cat (Cat Nil (Unit 1)) Nil
 
 --eqSeq: toma dos secuencias y devuelve True sii ambas contienen los mismos valores, en el mismo orden y en la misma cantidad
 --eqSeq :: Seq e -> Seq e -> Bool
+eqSeq Nil Nil = True
+eqSeq (Unit x) (Unit y) = x==y
+eqSeq Nil s2 = False
+eqSeq s1 Nil = False
+eqSeq (Unit x) s2 = False
+eqSeq s1 (Unit x) = False
+eqSeq (Cat s1 s2) (Cat s3 s4) = (eqSeq s1 s3) && (eqSeq s2 s4)
+
+eqSeqExample1 = Cat (Cat Nil (Unit 1)) (Cat Nil (Cat (Unit 2)(Unit 3)))
+eqSeqExample2 = Cat (Cat Nil (Unit 11)) (Cat Nil (Cat (Unit 22)(Unit 33)))
+eqSeqExample3 = Cat (Cat Nil (Unit 1)) (Unit 2)
+
 
 
 --seq2List: toma una secuencia y devuelve una lisa con los mismos elementos en el mismo orden
@@ -55,3 +67,5 @@ seq2List (Unit x)     = [x]
 seq2List (Cat s1 s2)  = seq2List s1 ++ seq2List s2
 
 seq2ListExample = Cat (Cat (Cat (Unit 1) (Unit 2)) (Nil)) (Cat (Nil) (Unit 3))
+
+
