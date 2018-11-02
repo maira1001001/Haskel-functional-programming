@@ -6,23 +6,24 @@ data Seq e = Nil | Unit e | Cat (Seq e) (Seq e) deriving Show
 
 seqExample = Cat (Cat Nil (Unit 1)) (Cat (Unit 2) Nil)
 
---appSeq: toma dos secuencias y devuelve su concatenación
--- appSeq :: Seq e -> Seq e -> Seq e
+-- appSeq: toma dos secuencias y devuelve su concatenación
+
+appTwoSeq :: Seq e -> Seq e -> [e]
+appTwoSeq (Seq e) (Seq e) = appSeq (Seq e) ++ appSeq (Seq e)
+
+appSeq :: Seq e -> [e]
 appSeq Nil         = []
 appSeq (Unit x)    = [x]
 appSeq (Cat s1 s2) = appSeq s1 ++ appSeq s2
 
--- appSeq' :: Seq e -> Seq e -> Seq e
--- appSeq'
-
 --lenSeq: calcula la cantidad de elementos de una secuencia
---lenSeq :: Seq e -> Int
+lenSeq :: Seq e -> Int
 lenSeq Nil          = 0
 lenSeq (Unit x)     = 1
 lenSeq (Cat s1 s2)  = lenSeq s1 + lenSeq s2
 
 --revSeq: toma una secuencia e invierte sus elementos
---revSeq :: Seq e -> Seq e
+revSeq :: Seq e -> Seq e
 revSeq Nil          = Nil
 revSeq (Unit x)     = Unit x
 revSeq (Cat s1 s2)  = Cat (revSeq s2) (revSeq s1)
