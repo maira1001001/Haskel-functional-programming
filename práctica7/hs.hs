@@ -18,3 +18,7 @@ hsFoldr = foldr ((+).unoSiEmpiezaConH) 0
 
 unoSiEmpiezaConH str | (take 1 str) == "h"   = 1
                      | otherwise             = 0
+
+
+lenl :: [a] -> Int
+lenl = foldr (\_ n -> n +1) 0

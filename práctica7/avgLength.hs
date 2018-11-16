@@ -1,12 +1,14 @@
 -- avgLength: calcula la longitud promedio de las palabras de una lista
---
 
---avgLength :: [String] -> Float
 
-avgLength []     = 0
-avgLength (s:ss) = totalStr (s:ss) / length (ss+1) 
+lengthList :: [a] -> Int
+lengthList = foldr (\_ x -> x+1) 0
+sumList = foldr (+) 0
 
-totalStr = foldr ((+).length) 0
+strLength :: [String] -> Int
+strLength = foldr ((+).length) 0
 
+avgLength :: [String] -> Int
+avgLength xs = strLength xs `div` lengthList xs
 
 

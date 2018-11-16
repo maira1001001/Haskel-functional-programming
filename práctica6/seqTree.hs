@@ -5,25 +5,48 @@ data Seq e = Nil | Unit e | Cat (Seq e) (Seq e) deriving Show
 seqExample = Cat (Cat Nil (Unit 1)) (Cat (Unit 2) Nil)
 
 --appSeq: toma dos secuencias y devuelve su concatenación
---appSeq :: Seq e -> Seq e -> Seq e
-appSeq Nil         = []
-appSeq (Unit x)    = [x]
-appSeq (Cat s1 s2) = appSeq s1 ++ appSeq s2
+appSeq :: Seq e -> Seq e -> Seq e
+appSeq s1 s2  = Cat s1 s2
+
+appSeqEx1 = Cat Nil (Unit 1)
+appSeqEx2 = Nil
+appSeqEx3 = Cat (Unit 2) (Cat Nil (Unit 3))
+
+--conSeq: toma un elemento y una secuencia y devuelve la secuencia que tiene al elemento dado como cabeza y a la secuencia dada como cola
+conSeq :: a -> Seq a -> Seq a
+conSeq x seq = Cat (Unit x) seq
+
+conSeqEx1 = Cat Nil Nil
+conSeqEx2 = Cat (Unit 2) (Cat Nil (Unit 3))
+conSeqEx3 = Unit 1
 
 --lenSeq: calcula la cantidad de elementos de una secuencia
---lenSeq :: Seq e -> Int
+lenSeq :: Seq e -> Int
 lenSeq Nil          = 0
 lenSeq (Unit x)     = 1
 lenSeq (Cat s1 s2)  = lenSeq s1 + lenSeq s2
 
 --revSeq: toma una secuencia e invierte sus elementos
---revSeq :: Seq e -> Seq e
+revSeq :: Seq e -> Seq e
 revSeq Nil          = Nil
 revSeq (Unit x)     = Unit x
 revSeq (Cat s1 s2)  = Cat (revSeq s2) (revSeq s1)
 
 --headSeq: toma una secuencia y devuelve su primer elemento (el de más a la izq)
---headSeq :: Seq e -> e
+headSeqAux :: Seq e -> Maybe e
+
+headSeqAux Nil        = Nothing
+headSeqAux (Unit x)   = Just x
+headSeqAux Cat s1 s2 = if isNothing (headSeqAux s1) then s2 else fromJust (headSeqAux s1)
+--headSeqAux Cat s1 s2  = let 
+--                           r1 = headSeqAux s1
+--                           r2 = headSeqAux s2
+--                        in
+--                            if isNothing r1 then r2
+--                             else fromJust r1
+
+
+
 --headSeq Nil          = 
 --headSeq (Unit x)     = x
 --headSeq (Cat Nil s2) = headSeq s2
