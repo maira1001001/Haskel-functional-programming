@@ -7,6 +7,7 @@
 ---- 2. si x :: a y xs :: [a] entonces x:xs :: [a]
 
 import Data.Char(ord)
+import Data.Maybe
 
 --sum: suma los elementos de una lista de números. 
 sum' []     = 0
@@ -47,8 +48,40 @@ squares (n:ns)  = n*n : squares ns
 
 --lengths: dada una lista de listas, devuelve la lista de sus longitudes.
 lengths :: [[a]] -> [Int]
-lengths []       = 0
+lengths []       = []
 lengths (xs:xss) = lenl xs : lengths xss
 
 lenl [] = 0
 lenl (x:xs) = 1 + lenl xs
+
+
+--order: dada una lista de pares ordenados de números, devuelve la lista de aquellos
+--cuya primer componente es menor que el triple de la segunda.
+order :: [(Int,Int)] ->[(Int,Int)]
+order []     = []
+order (n:ns) = if esMenorQueElTriple n 
+               then n:order ns
+               else order ns
+
+esMenorQueElTriple :: (Int,Int)->Bool
+esMenorQueElTriple n = fst n < 3 * snd n
+
+--pairs: dada una lista de números, devuelve la lista con aquellos que son pares.
+pairs :: [Int] -> [Int]
+pairs []     = []
+pairs (n:ns) = if esPar n 
+               then n:pairs ns 
+               else pairs ns
+
+esPar :: Int -> Bool
+esPar  = \n -> mod n 2 == 0 
+ 
+--moreThan: dada una lista de listas xss y un número n, devuelve la lista de aquellas listas de xss que tienen longitud mayor que n.
+moreThan :: Int -> [[a]] -> [[a]]
+moreThan n []       = []
+moreThan n (xs:xss) = if esLongListaMayorA n xs 
+                      then xs:moreThan n xss 
+                      else moreThan n xss
+
+esLongListaMayorA :: Int -> [a] -> Bool 
+esLongListaMayorA n xs = lenl xs > n
