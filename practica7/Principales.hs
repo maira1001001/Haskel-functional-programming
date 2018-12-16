@@ -42,6 +42,16 @@ remainders n (x:xs) = mod x n : remainders n xs
 remaindersMap :: Int -> [Int] -> [Int]
 remaindersMap n = map (`mod` n)
 
+remainders' :: Int -> [Int] -> [Int]
+remainders' n = foldr ((:). resto n) []
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
+resto n x = mod x n
 --squares: dada una lista de números, devuele la lista de sus cuadrados
 squares :: [Float] -> [Float]
 squares = map (^2)
@@ -68,4 +78,7 @@ pairs2 = filter ((==0).(`mod` 2)) --no m agrada :X
 
 moreThan :: [[a]] -> Int -> [[a]]
 moreThan xss n = filter (\xs -> length xs > n) xss
+
+moreThan' :: Int -> [[a]] -> [[a]]
+moreThan' n= filter (\xs -> length xs > n)
 

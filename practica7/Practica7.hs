@@ -49,7 +49,6 @@ avgLength xs = (sum . lengths) xs `div` length xs
 --por ejemplo: adjacents [2, 1, 11, 4] = [(2,1),(1,11),(11,4)]
 adjacents:: [a] -> [(a,a)]
 adjacents = recr [] (\x xs r -> if null xs then [] else (x,head xs): r)
-
 --diffAdj, que toma una lista de numeros y devuelve la lista de los pares ordenados de todos los numeros
 -- adyacentes cuya diferencia es par.
 diffAdj:: [Int] -> [(Int,Int)]
@@ -68,15 +67,14 @@ remDups' = recr [] (\x xs r -> if not (null xs) && x == head xs then r else x:r)
 
 primes' n = take n (filter esPrimo [2..])
 
-esPrimo = \x -> x `mod` 2 /= 0 && x `mod` 3 /= 0
-
-f = foldr (:) []
+esPrimo n = True --hay que importar la función
+--esPrimo = \n -> nextDiv 1 n == n 
 
 --EJERCICIO 4
 
---filter' f = map (\x -> if f x then concat' else xs)
+filter' :: (a->Bool)->[a]->[a]
+filter' f  = concat.(map (\x -> if f x then [x] else [] ))
 
-concat' = foldr (++) []
 
 --EJERICIO 5
 --5. Deﬁnir las funciones takewhile, que devuelve el segmento inicial mas largo de una lista de elementos que 
